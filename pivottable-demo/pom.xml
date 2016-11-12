@@ -68,7 +68,7 @@
 		<dependency>
 			<groupId>org.vaadin.marcus</groupId>
 			<artifactId>pivottable</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
