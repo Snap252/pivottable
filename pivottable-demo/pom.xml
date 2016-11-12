@@ -10,7 +10,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<vaadin.version>7.4.3</vaadin.version>
+		<vaadin.version>7.6.8</vaadin.version>
 		<vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
 	</properties>
 
@@ -66,9 +66,16 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>au.com.bytecode</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>2.4</version>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.vaadin.marcus</groupId>
 			<artifactId>pivottable</artifactId>
 			<version>${project.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
@@ -77,7 +84,14 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-client-compiler</artifactId>
+			<scope>provided</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-themes</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-client-compiled</artifactId>
@@ -125,10 +139,10 @@
 			</plugin>
 
 			<plugin>
-		        <artifactId>maven-war-plugin</artifactId>
-		        <version>2.3</version>
-		        <configuration>
-		        	<packagingExcludes>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<packagingExcludes>
 						**/VAADIN/gwt-unitCache/**,
 						**/VAADIN/widgetsets/WEB-INF/**,
 						**/WEB-INF/lib/servlet-api-*.jar,
@@ -140,7 +154,7 @@
 						**/WEB-INF/classes/widgetsets/**
 					</packagingExcludes>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-		        </configuration>
+				</configuration>
 			</plugin>
 
 			<plugin>
@@ -158,11 +172,7 @@
 					<runTarget>http://localhost:8080/</runTarget>
 				</configuration>
 				<executions>
-					<!-- You are free to mark this as permanently ignored in Eclipse -->
 					<execution>
-						<configuration>
-							<!-- if you don't specify any modules, the plugin will find them -->
-						</configuration>
 						<goals>
 							<goal>resources</goal>
 							<goal>update-widgetset</goal>
@@ -171,23 +181,31 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
+				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>8.1.10.v20130312</version>
+				<version>9.3.14.v20161028</version>
 				<configuration>
 					<webApp>
-						<contextPath>/</contextPath>
+						<contextPath>/xxx</contextPath>
 					</webApp>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.vaadin</groupId>
+						<artifactId>vaadin-bom</artifactId>
+						<version>${vaadin.version}</version>
+						<type>pom</type>
+					</dependency>
+				</dependencies>
 			</plugin>
 
 		</plugins>
-	
+
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
