@@ -16,6 +16,7 @@ import com.vaadin.data.Property;
 import com.vaadin.server.JsonCodec;
 import com.vaadin.shared.AbstractComponentState;
 import com.vaadin.ui.AbstractJavaScriptComponent;
+import com.vaadin.ui.HasComponents;
 import com.vaadin.ui.JavaScriptFunction;
 
 import elemental.json.JsonArray;
@@ -86,6 +87,12 @@ public class PivotTable extends AbstractJavaScriptComponent {
 		void uiChange(UIChangeEvent e);
 	}
 
+	@Override
+	public void setParent(HasComponents parent) {
+		super.setParent(parent);
+		setLocale(getState());
+	}
+
 	private final ArrayList<UiChangeListener> uicListeners = new ArrayList<UiChangeListener>();
 
 	public void addUiChangeListener(UiChangeListener listener) {
@@ -98,6 +105,8 @@ public class PivotTable extends AbstractJavaScriptComponent {
 	public PivotTable() {
 		// TODO Auto-generated constructor stub
 		setLocale(getState());
+		setStyleName("pivot-table");
+
 		this.addFunction("onUiOptionChange", new JavaScriptFunction() {
 			@Override
 			public void call(JsonArray arguments) {
@@ -154,9 +163,8 @@ public class PivotTable extends AbstractJavaScriptComponent {
 	}
 
 	@Override
-	protected AbstractComponentState getState(boolean markAsDirty) {
-		// TODO Auto-generated method stub
-		return super.getState(markAsDirty);
+	protected PivotTableState getState(boolean markAsDirty) {
+		return (PivotTableState) super.getState(markAsDirty);
 	}
 
 	@Override

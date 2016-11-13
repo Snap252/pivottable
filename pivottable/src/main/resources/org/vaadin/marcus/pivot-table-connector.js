@@ -2,7 +2,7 @@
 window.org_vaadin_marcus_PivotTable = function() {
 
 	var table = $(this.getElement());
-	table.addClass("pivot-table");
+//	table.addClass("pivot-table");
 
 	this.onStateChange = function() {
 		var connector = this;
