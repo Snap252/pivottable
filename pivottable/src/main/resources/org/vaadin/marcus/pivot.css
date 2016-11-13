@@ -50,16 +50,16 @@ table.pvtTable tbody tr td {
     border: 1px dashed #aaa;
 }
 
-.pvtAxisContainer li span.pvtAttr {
+/*.pvtAxisContainer li span.pvtAttr {
     -webkit-text-size-adjust: 100%;
-    /*background: #F3F3F3;*/
+    background: #F3F3F3;
     border: 1px solid #DEDEDE;
     padding: 2px 5px;
     white-space:nowrap;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-}
+}*/
 
 .pvtTriangle {
     cursor:pointer;
