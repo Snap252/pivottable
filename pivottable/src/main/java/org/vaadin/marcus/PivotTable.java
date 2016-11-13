@@ -125,7 +125,7 @@ public class PivotTable extends AbstractJavaScriptComponent {
 		Collection<?> propertyIds = container.getContainerPropertyIds();
 		Collection<?> itemIds = container.getItemIds();
 
-		Collection<Object[]> valuesList = new ArrayList<Object[]>(propertyIds.size() * (itemIds.size() + 1));
+		Collection<Object[]> valuesList = new ArrayList<Object[]>(itemIds.size() + 1);
 		valuesList.add(propertyIds.toArray());
 		System.err.println(itemIds.size());
 		for (Object itemId : itemIds) {
