@@ -1,0 +1,58 @@
+//valo is provided : @import "../../themes/valo/valo.scss";
+//@see: https://github.com/vaadin/spreadsheet/blob/master/vaadin-spreadsheet/src/main/webapp/VAADIN/addons/spreadsheet/spreadsheet.scss
+@mixin pivot-table-header-cell {
+	@include valo-gradient($v-background-color);
+	white-space: nowrap;
+	font-size: $v-table-header-font-size;
+	text-shadow: valo-text-shadow();
+	@include pivot-table-cell;
+}
+@mixin pivot-table-cell {
+	$background-color: $v-table-background-color or valo-table-background-color();
+	$border-color: $v-table-border-color or first-color(valo-border($color: $background-color, $strength: 0.8));
+	border: $v-table-border-width solid $border-color;
+}
+@mixin pivottable {
+	.v-pivot-table {
+		$background-color: $v-table-background-color or valo-table-background-color();
+		color: valo-font-color($v-background-color);
+		th {
+			@include pivot-table-header-cell;
+			&.pvtTotalLabel {
+				font-weight: bold;
+				background-color: red;
+			}
+			background-color: $v-background-color;
+			border-radius: $v-border-radius;
+			font-weight: normal;
+		}
+		.pvtTable tr:hover td {
+			/*border-color: red !important;*/
+		}
+		td {
+			/*border: 1px solid #CDCDCD;*/
+			@include pivot-table-cell;
+			&.pvtVal, &.pvtTotal {
+				white-space: nowrap;
+			}
+		}
+		.pvtVals {
+			min-width: 150px;
+			select {
+				margin-bottom: 3px;
+				margin-top: 3px;
+			}
+		}
+		.pvtVals select, select.pvtRenderer {
+			width: 100%;
+		}
+		.pvtRows span.pvtAttr {
+			width: 100%;
+			display: inline-block;
+			box-sizing: border-box;
+		}
+		.pvtAxisContainer li {
+			padding: 3px;	
+		}
+	}
+}

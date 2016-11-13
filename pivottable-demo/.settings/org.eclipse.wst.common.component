@@ -3,6 +3,7 @@
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <property name="context-root" value="pivottable-demo"/>
         <property name="java-output-path" value="/pivottable-demo/target/classes"/>
         <property name="component.exclusion.patterns" value="**/VAADIN/gwt-unitCache/**,**/VAADIN/widgetsets/WEB-INF/**,**/WEB-INF/lib/servlet-api-*.jar,**/WEB-INF/lib/vaadin-client-*.jar,**/WEB-INF/lib/jetty-*.jar,**/WEB-INF/lib/ant-*.jar,**/WEB-INF/classes/gwt-unitCache/**,**/WEB-INF/classes/themes/**,**/WEB-INF/classes/widgetsets/**"/>
