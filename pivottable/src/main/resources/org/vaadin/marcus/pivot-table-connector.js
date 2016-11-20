@@ -11,15 +11,23 @@ window.org_vaadin_marcus_PivotTable = function() {
 			return;
 		}
 		var dateFormat = $.pivotUtilities.derivers.dateFormat;
+		var _refresh = function(config) {
+			connector.onUiOptionChange({
+				rows : config.rows,
+				cols : config.cols,
+				aggregatorName : config.aggregatorName,
+				xx : connector.aggregator,
+			});
+		};
+		
 		var options = {
-			onRefresh : function(config) {
-				connector.onUiOptionChange({
-					rows : config.rows,
-					cols : config.cols,
-					aggregatorName : config.aggregatorName,
-					xx : connector.aggregator,
-				});
-			},
+			onRefresh : _refresh,
+			rendererName: "Table With Subtotal",
+            rendererOptions: {
+                collapseRowsAt: "Gender",
+                collapseColsAt: "Party"
+            },
+//            dataClass: $.pivotUtilities.SubtotalPivotData,
 			derivedAttributes: {
 				"Jahr (Datum)": dateFormat("Datum", "%y", true),
 				"Quartal (Datum)": dateFormat("Datum", "Q%Q/%y", true),
@@ -27,7 +35,8 @@ window.org_vaadin_marcus_PivotTable = function() {
 			},
 			renderers: $.extend(
                     $.pivotUtilities.renderers,
-                    $.pivotUtilities.c3_renderers
+//                    $.pivotUtilities.c3_renderers,
+                    $.pivotUtilities.subtotal_renderers
 //                    $.pivotUtilities.export_renderers
                     )
 		};

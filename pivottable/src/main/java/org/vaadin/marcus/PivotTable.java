@@ -22,9 +22,9 @@ import com.vaadin.ui.JavaScriptFunction;
 import elemental.json.JsonArray;
 import elemental.json.JsonObject;
 
-@JavaScript({ "jquery-1.8.3.min.js", "jquery-ui-1.9.2.custom.min.js",
+@JavaScript({ "jquery-1.11.2.js", "jquery-ui-1.11.4.js",
 		// "jquery.csv-0.71.min.js",
-		"pivot.js", "pivot.de.js",
+		"pivot.js", "pivot.de.js", "subtotal.js", "subtotal.js.map",
 		// "d3.v3.min.js",
 		// "c3.min.js",
 		"d3.min.js", "c3.js", "c3_renderers.js", "pivot-table-connector.js" })
