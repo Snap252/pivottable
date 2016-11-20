@@ -3,6 +3,7 @@ package org.vaadin.marcus;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -14,7 +15,6 @@ import com.vaadin.data.Container;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.server.JsonCodec;
-import com.vaadin.shared.AbstractComponentState;
 import com.vaadin.ui.AbstractJavaScriptComponent;
 import com.vaadin.ui.HasComponents;
 import com.vaadin.ui.JavaScriptFunction;
@@ -27,7 +27,7 @@ import elemental.json.JsonObject;
 		"pivot.js", "pivot.de.js",
 		// "d3.v3.min.js",
 		// "c3.min.js",
-		"pivot-table-connector.js" })
+		"d3.min.js", "c3.js", "c3_renderers.js", "pivot-table-connector.js" })
 @StyleSheet({ "pivot.css", })
 public class PivotTable extends AbstractJavaScriptComponent {
 
@@ -104,7 +104,7 @@ public class PivotTable extends AbstractJavaScriptComponent {
 	// }
 	public PivotTable() {
 		// TODO Auto-generated constructor stub
-		setLocale(getState());
+		// setLocale(getState());
 		setStyleName("v-pivot-table");
 
 		this.addFunction("onUiOptionChange", new JavaScriptFunction() {
@@ -123,16 +123,29 @@ public class PivotTable extends AbstractJavaScriptComponent {
 
 	public void setContainerDataSource(Container container) {
 		Collection<?> propertyIds = container.getContainerPropertyIds();
+		Object[] propertyArray = propertyIds.toArray();
+		{
+			int propertyIndex = 0;
+			for (Object propertyId : propertyIds) {
+				Class<?> type = container.getType(propertyId);
+				/* TODO: check subtypes */
+				if (type == Date.class) {
+					propertyArray[propertyIndex] = "date$_" + propertyArray[propertyIndex];
+				}
+				propertyIndex++;
+			}
+		}
 		Collection<?> itemIds = container.getItemIds();
+		int numberOfRows = itemIds.size() + 1;
 
-		Collection<Object[]> valuesList = new ArrayList<Object[]>(itemIds.size() + 1);
-		valuesList.add(propertyIds.toArray());
+		Collection<Object[]> valuesList = new ArrayList<Object[]>(numberOfRows);
+		valuesList.add(propertyArray);
 		System.err.println(itemIds.size());
 		for (Object itemId : itemIds) {
 			valuesList.add(getArray(container.getItem(itemId), propertyIds));
 		}
 		PivotTableState state = getState();
-		state.values = valuesList.toArray(new Object[itemIds.size()][]);
+		state.values = valuesList.toArray(new Object[numberOfRows][]);
 		setLocale(state);
 	}
 

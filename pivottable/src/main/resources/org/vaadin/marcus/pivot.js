@@ -409,11 +409,11 @@
         }
         utc = utcOutput ? "UTC" : "";
         return function(record) {
-          var date;
-          date = new Date(Date.parse(record[col]));
+          var date = record[col];
+          /*date = new Date(Date.parse(record[col]));
           if (isNaN(date)) {
             return "";
-          }
+          }*/
           return formatString.replace(/%(.)/g, function(m, p) {
             switch (p) {
               case "y":
@@ -434,6 +434,8 @@
                 return zeroPad(date["get" + utc + "Minutes"]());
               case "S":
                 return zeroPad(date["get" + utc + "Seconds"]());
+              case "Q":
+                return zeroPad(Math.floor(date["get" + utc + "Month"]() / 3) + 1);
               default:
                 return "%" + p;
             }

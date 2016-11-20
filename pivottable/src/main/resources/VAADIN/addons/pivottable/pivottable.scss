@@ -53,12 +53,9 @@
 			box-sizing: border-box;
 		}
 		.pvtAxisContainer li {
-				
+			padding: 3px;
 		}
 		.pvtAxisContainer li span.pvtAttr {
-			padding: 3px;
-			
-			
 			/*from global.scss*/
 			font: inherit;
 			font-weight: 400;

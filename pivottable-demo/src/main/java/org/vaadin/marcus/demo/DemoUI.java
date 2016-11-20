@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 
@@ -91,9 +92,10 @@ public class DemoUI extends UI {
 		t.setContainerDataSource(src);
 		pivotTable.setContainerDataSource(src);
 		pivotTable.setData(Arrays.asList("Bereich", "Herkunft", "Mitarbeiter"),
-				Arrays.asList("Jahr", "Quartal", "Monat"));
+				Arrays.asList("Jahr_", "Quartal_", "Monat_"));
 	}
 
+	@SuppressWarnings("unused")
 	private void doExample() {
 		IndexedContainer src = buildContainerFromCSV();
 		t.setContainerDataSource(src);
@@ -112,7 +114,6 @@ public class DemoUI extends UI {
 
 		Type_(double d) {
 			this.d = d;
-
 		}
 	}
 
@@ -146,18 +147,21 @@ public class DemoUI extends UI {
 						 * "Gottlieb; Robert", "Aachen; Lena", "Luft; Dennis"
 						 */ };
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	static Indexed getRandom(int cnt) {
 		IndexedContainer indexedContainer = new IndexedContainer();
 		indexedContainer.addContainerProperty("Bereich", String.class, null);
 		indexedContainer.addContainerProperty("Herkunft", Herkunft.class, null);
 		indexedContainer.addContainerProperty("Typ", Type_.class, null);
 		indexedContainer.addContainerProperty("Mitarbeiter", String.class, null);
-		indexedContainer.addContainerProperty("Jahr", Number.class, null);
-		indexedContainer.addContainerProperty("Quartal", String.class, null);
-		indexedContainer.addContainerProperty("Monat", String.class, null);
+//		indexedContainer.addContainerProperty("Jahr", Number.class, null);
+//		indexedContainer.addContainerProperty("Quartal", String.class, null);
+//		indexedContainer.addContainerProperty("Monat", String.class, null);
 		indexedContainer.addContainerProperty("Stunden", Number.class, null);
+		indexedContainer.addContainerProperty("Datum", Date.class, null);
 
+		final long date2015_01_01 = new Date(2015-1900, 0, 1).getTime();
+		
 		for (int i = 0; i < cnt; i++) {
 			Item item = indexedContainer.getItem(indexedContainer.addItem());
 			{
@@ -166,12 +170,14 @@ public class DemoUI extends UI {
 				Type_ typ = getRandom(Type_.values());
 				item.getItemProperty("Typ").setValue(typ);
 				item.getItemProperty("Mitarbeiter").setValue(getRandom(mitarbeiter));
-				int month = r.nextInt(12);
-				int jahr = r.nextInt(3) + 2011;
-				item.getItemProperty("Jahr").setValue(jahr);
-				item.getItemProperty("Quartal").setValue("Q" + ((month / 3) + 1) + "/" + jahr);
-				item.getItemProperty("Monat").setValue((month + 1) + "/" + jahr);
-				item.getItemProperty("Stunden").setValue((r.nextDouble() - typ.d) * 120);
+//				int month = r.nextInt(12);
+//				int jahr = r.nextInt(3) + 2011;
+//				item.getItemProperty("Jahr").setValue(jahr);
+//				item.getItemProperty("Quartal").setValue("Q" + ((month / 3) + 1) + "/" + jahr);
+//				item.getItemProperty("Monat").setValue((month + 1) + "/" + jahr);
+				item.getItemProperty("Stunden").setValue((r.nextDouble() - 0.5 - typ.d) * 120);
+
+				item.getItemProperty("Datum").setValue(new Date(date2015_01_01 + r.nextInt(500) * 86400000L));
 			}
 		}
 		return indexedContainer;
