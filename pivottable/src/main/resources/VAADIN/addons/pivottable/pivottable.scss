@@ -1,7 +1,7 @@
 //valo is provided : @import "../../themes/valo/valo.scss";
 //@see: https://github.com/vaadin/spreadsheet/blob/master/vaadin-spreadsheet/src/main/webapp/VAADIN/addons/spreadsheet/spreadsheet.scss
-@mixin pivot-table-header-cell {
-	@include valo-gradient($v-background-color);
+@mixin pivot-table-header-cell($direction: to bottom) {
+	@include valo-gradient($color: $v-background-color, $direction: $direction);
 	white-space: nowrap;
 	font-size: $v-table-header-font-size;
 	text-shadow: valo-text-shadow();
@@ -25,6 +25,9 @@
 			background-color: $v-background-color;
 			border-radius: $v-border-radius;
 			font-weight: normal;
+			&.pvtRowLabel, &.pvtAxisLabel {
+				@include pivot-table-header-cell(to right);
+			}
 		}
 	
 		/* .pvtTable tr:hover td {
