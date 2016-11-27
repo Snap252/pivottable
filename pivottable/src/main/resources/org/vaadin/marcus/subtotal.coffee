@@ -617,7 +617,9 @@ callWithJQuery ($) ->
             tr = buildColTotalsHeader(rowAttrs, colAttrs)
             if colAttrs.length != 0
                 buildColTotals(tr, colHeaderCols)
-            buildGrandTotal(tbody, tr)
+            tfoot = document.createElement("tfoot")
+            result.appendChild tfoot
+            buildGrandTotal(tfoot, tr)
             result.setAttribute("data-numrows", rowKeys.length)
             result.setAttribute("data-numcols", colKeys.length)
             if not opts.collapseRowsAt? and not opts.collapseColsAt?

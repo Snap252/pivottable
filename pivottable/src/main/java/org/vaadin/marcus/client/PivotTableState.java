@@ -5,11 +5,12 @@ import com.vaadin.shared.ui.JavaScriptComponentState;
 import java.util.List;
 
 public class PivotTableState extends JavaScriptComponentState {
-//	public String csv;
+	// public String csv;
 	public List<String> rows;
 	public List<String> cols;
 	public String locale;
-	public String aggregatorName = "Sum";
+	public String aggregatorName = "Summe";
+	public String[] vals = new String[] { "Stunden" };
 
 	public Object[][] values;
 }

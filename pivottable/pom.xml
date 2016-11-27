@@ -110,9 +110,12 @@
 				<artifactId>coffee-maven-plugin</artifactId>
 				<version>1.4.16</version>
 				<configuration>
+					<map>false</map>
+					<header>false</header>
+					
 					<compileIndividualFiles>true</compileIndividualFiles>
 					<coffeeDir>${basedir}/src/main/resources/org/vaadin/marcus</coffeeDir>
-					<coffeeOutputDirectory>${basedir}/src/main/resources/org/vaadin/marcus</coffeeOutputDirectory>
+					<coffeeOutputDirectory>${project.build.directory}/classes/org/vaadin/marcus</coffeeOutputDirectory>
 				</configuration>
 			</plugin>
 

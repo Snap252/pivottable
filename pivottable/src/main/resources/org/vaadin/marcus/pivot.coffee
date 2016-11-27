@@ -481,6 +481,7 @@ callWithJQuery ($) ->
                 td.setAttribute("data-value", val)
                 tr.appendChild td
 
+
             totalAggregator = pivotData.getAggregator(rowKey, [])
             val = totalAggregator.value()
             td = document.createElement("td")
@@ -490,8 +491,10 @@ callWithJQuery ($) ->
             td.setAttribute("data-for", "row"+i)
             tr.appendChild td
             tbody.appendChild tr
+        result.appendChild tbody
 
         #finally, the row for col totals, and a grand total
+        tfoot = document.createElement("tfoot")
         tr = document.createElement("tr")
         th = document.createElement("th")
         th.className = "pvtTotalLabel"
@@ -514,8 +517,8 @@ callWithJQuery ($) ->
         td.textContent = totalAggregator.format(val)
         td.setAttribute("data-value", val)
         tr.appendChild td
-        tbody.appendChild tr
-        result.appendChild tbody
+        tfoot.appendChild tr
+        result.appendChild tfoot
 
         #squirrel this away for later
         result.setAttribute("data-numrows", rowKeys.length)

@@ -13,10 +13,33 @@
 	border: $v-table-border-width solid $border-color;
 }
 @mixin pivottable {
+	.v-pivot-table, .v-pivot-table .pvtUi, .pvtRendererArea, .result-wrapper {
+		height: 100%;
+		width: 100%
+	}
+	.result-wrapper {
+		overflow: auto;
+	}
+
+	.pvtTable thead th {
+		z-index: 100;
+	}
+
+	.pvtTable th {
+		z-index: 50;
+	} 
+
 	.v-pivot-table {
 		$background-color: $v-table-background-color or valo-table-background-color();
 		color: valo-font-color($v-background-color);
-		th {
+		
+		.pvtUi {
+			border-spacing: 0px;
+			td {
+				padding: 0px;
+			}
+		}
+		.pvtTable th {
 			@include pivot-table-header-cell;
 			&.pvtTotalLabel {
 				font-weight: bold;
